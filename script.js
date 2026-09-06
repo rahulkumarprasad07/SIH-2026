@@ -34,7 +34,7 @@ const gameData = {
     },
 
     mizoram: {
-        answers: [2, 3, 0, 2, 1, 1, 3, 0, 2, 1],
+      answers: [2, 1, 0, 3, 3, 2, 0, 1, 3, 1],
         difficulties: [
             "easy", "easy", "medium", "medium", "hard",
             "hard", "medium", "medium", "hard", "hard"
@@ -50,7 +50,8 @@ const gameData = {
     },
 
     tripura: {
-        answers: [2, 1, 0, 3, 3, 2, 0, 1, 3, 1],
+        
+        answers: [2, 3, 0, 2, 1, 1, 3, 0, 2, 1],
         difficulties: [
             "easy", "easy", "medium", "medium", "hard",
             "hard", "medium", "medium", "hard", "hard"
