@@ -677,3 +677,125 @@ speechSynthesis.onvoiceschanged = function () {
     speechSynthesis.getVoices();
 
 };
+// ==========================================
+// ML DIFFICULTY API CALL
+// ==========================================
+async function getRecommendedDifficulty(accuracy, responseTime, streak) {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        accuracy: accuracy,
+        response_time: responseTime,
+        streak: streak
+      })
+    });
+
+    const data = await response.json();
+    console.log("ML recommended difficulty:", data.difficulty);
+    return data.difficulty; // "Easy", "Medium", or "Hard"
+  } catch (error) {
+    console.error("ML Server connection failed, defaulting to Medium:", error);
+    return "Medium";
+  }
+}
+
+// ==========================================
+// ODD ONE OUT GAME ENGINE
+// ==========================================
+let currentQNum = 1;
+const totalQuestions = 10;
+let correctHits = 0;
+let streak = 0;
+let questionStartTime = Date.now();
+let currentDifficulty = "Medium";
+
+// Puzzles by difficulty level (using icons/emojis for odd items)
+const gameData = {
+  Easy: [
+    { prompt: "Find the odd leaf/item", items: ["🍂", "🍂", "🍁", "🍂"], oddIndex: 2 },
+    { prompt: "Find the odd shape", items: ["⭐", "⭐", "⭐", "🔵"], oddIndex: 3 }
+  ],
+  Medium: [
+    { prompt: "Find the different color/shape", items: ["🍎", "🍎", "🍏", "🍎"], oddIndex: 2 },
+    { prompt: "Find the odd symbol", items: ["🔶", "🔷", "🔷", "🔷"], oddIndex: 0 }
+  ],
+  Hard: [
+    { prompt: "Find the subtle difference", items: ["🟤", "🟤", "⚫", "🟤"], oddIndex: 2 },
+    { prompt: "Find the reversed angle", items: ["🔺", "🔻", "🔺", "🔺"], oddIndex: 1 }
+  ]
+};
+
+function displayCurrentQuestion() {
+  const quesCounter = document.querySelector(".quesNo p");
+  if (quesCounter) quesCounter.innerText = `Question ${currentQNum} of ${totalQuestions} (${currentDifficulty})`;
+
+  const pool = gameData[currentDifficulty] || gameData["Medium"];
+  const puzzle = pool[(currentQNum - 1) % pool.length];
+
+  const optionCards = document.querySelectorAll(".s3 .option");
+
+  optionCards.forEach((card, index) => {
+    // Render the visual item directly inside the option box
+    card.innerHTML = `<span style="font-size: 3rem; display: block; pointer-events: none;">${puzzle.items[index]}</span>`;
+    card.style.cursor = "pointer";
+
+    // Clean old listeners by re-cloning
+    const freshCard = card.cloneNode(true);
+    card.parentNode.replaceChild(freshCard, card);
+
+    freshCard.addEventListener("click", () => handleCardClick(index, puzzle.oddIndex));
+  });
+
+  questionStartTime = Date.now();
+}
+
+async function handleCardClick(selectedIndex, correctIndex) {
+  const responseTimeSec = Math.max(1, (Date.now() - questionStartTime) / 1000);
+
+  if (selectedIndex === correctIndex) {
+    correctHits++;
+    streak++;
+    alert("Correct! Well done.");
+  } else {
+    streak = 0;
+    alert("Incorrect! Keep going.");
+  }
+
+  const accuracy = correctHits / currentQNum;
+
+  // Ask Python ML model for the next question's difficulty
+  currentDifficulty = await getRecommendedDifficulty(accuracy, responseTimeSec, streak);
+
+  currentQNum++;
+  if (currentQNum <= totalQuestions) {
+    displayCurrentQuestion();
+  } else {
+    alert(`Game Finished! Final Score: ${correctHits}/${totalQuestions}`);
+    // Return to Screen 2
+    screen3.style.display = "none";
+    screen2.style.display = "flex";
+  }
+}
+
+// Start game on 'PLAY GAME' click
+playGame.addEventListener("click", function () {
+  currentQNum = 1;
+  correctHits = 0;
+  streak = 0;
+  currentDifficulty = "Medium";
+  displayCurrentQuestion();
+});
+
+// Home icon inside Screen 3 returns to Screen 2
+document.getElementById("home-icon")?.addEventListener("click", function () {
+  screen3.style.display = "none";
+  screen2.style.display = "flex";
+});
+
+// ML Test button listener
+document.getElementById("test-ml-btn")?.addEventListener("click", async () => {
+  const result = await getRecommendedDifficulty(0.9, 2.5, 5);
+  alert(`ML Server Connected! Predicted Difficulty: ${result}`);
+});
