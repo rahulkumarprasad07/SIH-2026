@@ -596,6 +596,151 @@ hr {
     background: #e05252;
     color: white;
 }
+/* Win Popup */
+.win-popUp {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: min(420px, 90vw);
+    padding: 30px 25px;
+
+    background: white;
+    border-radius: 24px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+    z-index: 1000;
+
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Heading */
+.win-popUp h3 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #2d2d2d;
+}
+
+.win-popUp > p {
+    margin: 0 0 18px;
+    font-size: 16px;
+    color: #666;
+}
+
+/* Stars */
+.stars {
+    margin: 5px 0 22px;
+    font-size: 30px;
+}
+
+/* Score Board */
+.scoreBoard {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.score,
+.accuracy,
+.avg-time {
+    flex: 1;
+    padding: 12px 8px;
+    background: #f5f7fb;
+    border-radius: 14px;
+}
+
+.score p:first-child,
+.accuracy p:first-child,
+.avg-time p:first-child {
+    margin: 0 0 5px;
+    font-size: 14px;
+    color: #777;
+}
+
+.score p:last-child,
+.accuracy p:last-child,
+.avg-time p:last-child {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* Buttons */
+.play-again,
+.go-home {
+    width: 100%;
+    padding: 13px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.2s ease;
+}
+
+.play-again {
+    background: #4f46e5;
+    color: white;
+}
+
+.go-home {
+    background: #eef0f5;
+    color: #333;
+}
+
+.play-again p,
+.go-home p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.play-again i,
+.go-home i {
+    margin-right: 8px;
+}
+
+/* Hover */
+.play-again:hover {
+    transform: translateY(-2px);
+}
+
+.go-home:hover {
+    background: #e2e5eb;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .win-popUp {
+        padding: 25px 18px;
+    }
+
+    .win-popUp h3 {
+        font-size: 24px;
+    }
+
+    .scoreBoard {
+        gap: 6px;
+    }
+
+    .score,
+    .accuracy,
+    .avg-time {
+        padding: 10px 5px;
+    }
+
+    .score p:last-child,
+    .accuracy p:last-child,
+    .avg-time p:last-child {
+        font-size: 17px;
+    }
+}
 /* =========================
    SCREEN 4 - PROGRESS
 ========================= */
@@ -1300,7 +1445,6 @@ hr {
         font-size: 0.9rem;
     }
 }
-
 
 
 

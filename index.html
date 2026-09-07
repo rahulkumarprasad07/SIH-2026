@@ -13,195 +13,260 @@
 </head>
 
 <body>
-  <!-- screen 1 -->
+  <!-- SCREEN 1 -->
   <section class="screen s1">
     <div id="circleLogo">
       <img src="assets/logo.jpg" alt="logo">
     </div>
+
     <div class="logoText">
       <h3>Odd One Out</h3>
-      <p>Train your brain,one</p>
+      <p>Train your brain, one</p>
       <p>gentle puzzle at a time.</p>
-
     </div>
+
     <div id="bottom-logo">
       <img src="assets/people logo.jpg" alt="people">
       <button id="startBtn">Get Started</button>
     </div>
   </section>
-  <!-- screen 2 -->
-  <section class="screen s2">
 
+  <!-- SCREEN 2 -->
+  <section class="screen s2">
     <nav id="top-bar">
-      <a href=""><i class="fa-solid fa-house"></i>
+      <a href="#" id="home-nav">
+        <i class="fa-solid fa-house"></i>
         <p>Home</p>
       </a>
+
       <h3>Brain Train</h3>
-      <a href=""><i class="fa-regular fa-circle-question"></i>
+
+      <a href="#" id="help-nav">
+        <i class="fa-regular fa-circle-question"></i>
         <p>Help</p>
       </a>
     </nav>
+
     <hr>
+
     <div class="tagline">
       <h3 id="game-title">Odd One Out</h3>
       <p id="game-subtitle">Select an option to begin</p>
-      <div class="voice-icon" id="voice-btn">
-        <i class="fa-solid fa-volume-high "></i>
-      </div>
 
+      <button class="voice-icon" id="voice-btn" type="button" aria-label="Read menu aloud">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
     </div>
 
     <div class="box">
-      <div class="boxes b1" id="play-game">
-        <p><i><i class="fa-regular fa-circle-play"></i></i></p>
+      <div class="boxes b1" id="play-game" role="button" tabindex="0">
+        <p><i class="fa-regular fa-circle-play"></i></p>
         <h3>PLAY GAME</h3>
       </div>
-      <div class="boxes b2" id="progress">
-        <p><i><i class="fa-solid fa-chart-simple"></i></i></p>
+
+      <div class="boxes b2" id="progress" role="button" tabindex="0">
+        <p><i class="fa-solid fa-chart-simple"></i></p>
         <h3>MY PROGRESS</h3>
       </div>
-      <div class="boxes b3" id="settings">
-        <p><i><i class="fa-solid fa-gear"></i></i></p>
+
+      <div class="boxes b3" id="settings" role="button" tabindex="0">
+        <p><i class="fa-solid fa-gear"></i></p>
         <h3>SETTINGS</h3>
       </div>
     </div>
-
-
   </section>
-  <!-- screen 3 -->
+
+  <!-- SCREEN 3 -->
   <section class="screen s3">
     <div class="header S3">
-      <div id="home-icon">
+      <div id="home-icon" role="button" tabindex="0" aria-label="Home">
         <i class="fa-solid fa-house"></i>
       </div>
+
       <div class="quesNo">
-        <p>Question 1 of 10</p>
-      </div>
+    <p></p>
+</div>
     </div>
 
     <h3 class="question">Find the one that is different</h3>
 
-  <div class="hearQues" id="hear-question-btn">
-      <p> <i class="fa-solid fa-volume-high "></i> HEAR QUESTION</p>
-    </div>
+    <button class="hearQues" id="hear-question-btn" type="button">
+      <i class="fa-solid fa-volume-high"></i>
+      <span>HEAR QUESTION</span>
+    </button>
+
     <div class="squares-container">
       <div class="squares upper">
-        <div class="option o1">
-          <img src="assets/logo.jpg" alt="OPTION-img">
+        <div class="option o1" role="button" tabindex="0">
+          <img src="assets/logo.jpg" alt="Option 1">
         </div>
-        <div class="option o2">
-          <img src="assets/logo.jpg" alt="OPTION-img">
+        <div class="option o2" role="button" tabindex="0">
+          <img src="assets/logo.jpg" alt="Option 2">
         </div>
       </div>
+
       <div class="squares lower">
-        <div class="option o3">
-          <img src="assets/logo.jpg" alt="OPTION-img">
+        <div class="option o3" role="button" tabindex="0">
+          <img src="assets/logo.jpg" alt="Option 3">
         </div>
-        <div class="option o4">
-          <img src="assets/logo.jpg" alt="OPTION-img">
+        <div class="option o4" role="button" tabindex="0">
+          <img src="assets/logo.jpg" alt="Option 4">
         </div>
       </div>
     </div>
-    <button class="end"><i class="fa-solid fa-person-walking-arrow-right"></i>Exit</button>
-    <div class="exit-popup exitPopup">
+
+    <button class="end" type="button">
+      <i class="fa-solid fa-person-walking-arrow-right"></i>
+      <span>Exit</span>
+    </button>
+
+    <div class="exit-popup exitPopup" aria-hidden="true">
       <div class="popup-box">
         <h3>Exit Game?</h3>
         <p>Are you sure you want to leave?</p>
 
         <div class="popup-buttons">
-          <button class="cancelExit">Cancel</button>
-          <button class="confirmExit">Exit</button>
+          <button class="cancelExit" type="button">Cancel</button>
+          <button class="confirmExit" type="button">Exit</button>
         </div>
       </div>
     </div>
+
+    <div class="win-popUp" aria-hidden="true">
+      <h3>Great Job!</h3>
+      <p>You've completed the challenge.</p>
+
+      <div class="stars" aria-label="Game result"></div>
+
+      <div class="scoreBoard">
+        <div class="score">
+          <p>Score</p>
+          <p>0/10</p>
+        </div>
+        <div class="accuracy">
+          <p>Accuracy</p>
+          <p>0%</p>
+        </div>
+        <div class="avg-time">
+          <p>Avg. Time</p>
+          <p>0s</p>
+        </div>
+      </div>
+
+      <button class="play-again" type="button">
+        <i class="fa-solid fa-rotate-right"></i>
+        <span>PLAY AGAIN</span>
+      </button>
+
+      <button class="go-home" type="button">
+        <i class="fa-solid fa-house"></i>
+        <span>HOME</span>
+      </button>
+    </div>
   </section>
-  <!-- //screen 4 -->
+
+  <!-- SCREEN 4 -->
   <section class="screen s4">
     <div class="header s4">
       <h3>Progress</h3>
     </div>
+
     <div class="slogans">
       <h3>Your Progress</h3>
       <p>Track your game performance and cognitive improvements.</p>
     </div>
+
     <div class="uppper boxees">
       <div class="info i1">
         <img src="assets/logo.jpg" alt="icon">
-        <h3>42</h3>
+        <h3 id="games-played-value">0</h3>
         <p>Games Played</p>
       </div>
+
       <div class="info i2">
         <img src="assets/logo.jpg" alt="icon">
-        <h3>85%</h3>
+        <h3 id="accuracy-value">0%</h3>
         <p>Accuracy</p>
       </div>
     </div>
+
     <div class="lower boxees">
       <div class="info i3">
         <img src="assets/logo.jpg" alt="icon">
-        <h3>1,200</h3>
+        <h3 id="best-score-value">0</h3>
         <p>Best Score</p>
       </div>
+
       <div class="info i4">
         <img src="assets/logo.jpg" alt="icon">
-        <h3>45s</h3>
+        <h3 id="avg-time-value">0s</h3>
         <p>Avg. Time</p>
       </div>
     </div>
-    <button class="end"><i class="fa-solid fa-person-walking-arrow-right"></i>Exit</button>
-    <div class="exit-popup exitPopup">
+
+    <button class="end" type="button">
+      <i class="fa-solid fa-person-walking-arrow-right"></i>
+      <span>Exit</span>
+    </button>
+
+    <div class="exit-popup exitPopup" aria-hidden="true">
       <div class="popup-box">
         <h3>Exit Game?</h3>
         <p>Are you sure you want to leave?</p>
 
         <div class="popup-buttons">
-          <button class="cancelExit">Cancel</button>
-          <button class="confirmExit">Exit</button>
+          <button class="cancelExit" type="button">Cancel</button>
+          <button class="confirmExit" type="button">Exit</button>
         </div>
       </div>
     </div>
   </section>
-  <!-- screen 5 -->
+
+  <!-- SCREEN 5 -->
   <section class="screen s5">
-    <div>
-      <p><i class="fa-solid fa-gear"></i>Settings</p>
+    <div class="settings-heading">
+      <p><i class="fa-solid fa-gear"></i> <span>Settings</span></p>
     </div>
+
     <h3>Languages</h3>
+
     <div class="language-box">
-      <label>Language</label>
+      <label for="languageSelector">Language</label>
       <select id="languageSelector">
-    <option value="en">English</option>
-    <option value="hi">हिन्दी</option>
-    <option value="as">অসমীয়া (Assamese)</option>
-    <option value="brx">बड़ो (Bodo)</option>
-    <option value="mni">মৈতৈলোন্ (Meitei/Manipuri)</option>
-    <option value="kha">Khasi</option>
-    <option value="lus">Mizo</option>
-    <option value="kok">Kokborok</option>
-    <option value="nag">Nagamese</option>
-    <option value="garo">Garo</option>
-</select>
+        <option value="en">English</option>
+        <option value="hi">हिन्दी</option>
+        <option value="as">অসমীয়া (Assamese)</option>
+        <option value="brx">बड़ो (Bodo)</option>
+        <option value="mni">মৈতৈলোন্ (Meitei/Manipuri)</option>
+        <option value="kha">Khasi</option>
+        <option value="lus">Mizo</option>
+        <option value="kok">Kokborok</option>
+        <option value="nag">Nagamese</option>
+        <option value="garo">Garo</option>
+      </select>
     </div>
-      <button class="end"><i class="fa-solid fa-person-walking-arrow-right"></i>Exit</button>
-    <div class="exit-popup exitPopup">
+
+    <button class="end" type="button">
+      <i class="fa-solid fa-person-walking-arrow-right"></i>
+      <span>Exit</span>
+    </button>
+
+    <div class="exit-popup exitPopup" aria-hidden="true">
       <div class="popup-box">
         <h3>Exit Game?</h3>
         <p>Are you sure you want to leave?</p>
 
         <div class="popup-buttons">
-          <button class="cancelExit">Cancel</button>
-          <button class="confirmExit">Exit</button>
+          <button class="cancelExit" type="button">Cancel</button>
+          <button class="confirmExit" type="button">Exit</button>
         </div>
       </div>
     </div>
-
   </section>
-  <button id="test-ml-btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; padding: 12px 18px; background: #2563eb; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-  Test ML Difficulty
-  <script src="script.js"></script>
+<!-- ML Test Button -->
+  
+
+  <!-- IMPORTANT: language.js first, script.js second -->
   <script src="language.js"></script>
-
-</button>
+  <script src="script.js"></script>
 </body>
-
-</html>
