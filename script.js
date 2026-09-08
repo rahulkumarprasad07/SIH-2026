@@ -34,7 +34,7 @@ const gameData = {
     },
 
     mizoram: {
-      answers: [2, 1, 0, 3, 3, 2, 0, 1, 3, 1],
+        answers: [2, 1, 0, 3, 3, 2, 0, 1, 3, 1],
         difficulties: [
             "easy", "easy", "medium", "medium", "hard",
             "hard", "medium", "medium", "hard", "hard"
@@ -50,8 +50,25 @@ const gameData = {
     },
 
     tripura: {
-        
         answers: [2, 3, 0, 2, 1, 1, 3, 0, 2, 1],
+        difficulties: [
+            "easy", "easy", "medium", "medium", "hard",
+            "hard", "medium", "medium", "hard", "hard"
+        ]
+    },
+
+    // Arunachal Pradesh → Tripura questions/answers
+    arunachalPradesh: {
+        answers: [2, 3, 0, 2, 1, 1, 3, 0, 2, 1],
+        difficulties: [
+            "easy", "easy", "medium", "medium", "hard",
+            "hard", "medium", "medium", "hard", "hard"
+        ]
+    },
+
+    // Sikkim → Mizoram questions/answers
+    sikkim: {
+        answers: [2, 1, 0, 3, 3, 2, 0, 1, 3, 1],
         difficulties: [
             "easy", "easy", "medium", "medium", "hard",
             "hard", "medium", "medium", "hard", "hard"
@@ -68,7 +85,20 @@ const gameData = {
 Object.keys(gameData).forEach(function (state) {
 
     const data = gameData[state];
+
     const questions = {};
+
+    // Arunachal uses Tripura images
+    // Sikkim uses Mizoram images
+    let imageState = state;
+
+    if (state === "arunachalPradesh") {
+        imageState = "tripura";
+    }
+
+    if (state === "sikkim") {
+        imageState = "mizoram";
+    }
 
     for (let i = 0; i < 10; i++) {
 
@@ -77,10 +107,10 @@ Object.keys(gameData).forEach(function (state) {
         questions["q" + q] = {
 
             images: [
-                "assets/states/" + state + "/q" + q + "/img1.jpg",
-                "assets/states/" + state + "/q" + q + "/img2.jpg",
-                "assets/states/" + state + "/q" + q + "/img3.jpg",
-                "assets/states/" + state + "/q" + q + "/img4.jpg"
+                "assets/states/" + imageState + "/q" + q + "/img1.jpg",
+                "assets/states/" + imageState + "/q" + q + "/img2.jpg",
+                "assets/states/" + imageState + "/q" + q + "/img3.jpg",
+                "assets/states/" + imageState + "/q" + q + "/img4.jpg"
             ],
 
             answer: data.answers[i],
@@ -106,12 +136,21 @@ const gameLanguageStateMap = {
     hi: "assam",
     as: "assam",
     brx: "assam",
+
     mni: "manipur",
+
     kha: "meghalaya",
     garo: "meghalaya",
+
     lus: "mizoram",
+
     nag: "nagaland",
-    kok: "tripura"
+
+    kok: "tripura",
+
+    // Additional states
+    arunachalPradesh: "arunachalPradesh",
+    sikkim: "sikkim"
 
 };
 
@@ -197,15 +236,44 @@ function getTranslation() {
 
 function getSelectedState() {
 
+    const stateSelector =
+        document.getElementById("stateSelector");
+
+    if (stateSelector && stateSelector.value) {
+
+        const selectedState =
+            stateSelector.value;
+
+        console.log(
+            "Selected State:",
+            selectedState
+        );
+
+        return selectedState;
+    }
+
+    // Fallback:
+    // Agar state selector available nahi hai,
+    // to language ke according state select hoga.
+
     const language =
         getSelectedLanguage();
-          console.log("Selected Language:", language);
-    console.log("Selected State:", gameLanguageStateMap[language]);
 
-   return (
-    gameLanguageStateMap[language] ||
-    "assam"
-);
+    const state =
+        gameLanguageStateMap[language] ||
+        "assam";
+
+    console.log(
+        "Selected Language:",
+        language
+    );
+
+    console.log(
+        "Selected State:",
+        state
+    );
+
+    return state;
 }
 
 
@@ -2717,4 +2785,32 @@ if (
 
         };
 
+}
+const stateSelector =
+    document.getElementById("stateSelector");
+
+if (stateSelector) {
+
+    const savedState =
+        localStorage.getItem("selectedState");
+
+    if (savedState) {
+        stateSelector.value = savedState;
+    }
+
+    stateSelector.addEventListener(
+        "change",
+        function () {
+
+            localStorage.setItem(
+                "selectedState",
+                this.value
+            );
+
+            console.log(
+                "State changed to:",
+                this.value
+            );
+        }
+    );
 }
